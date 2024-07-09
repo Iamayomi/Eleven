@@ -3,15 +3,15 @@ const { promisify } = require('util');
 const { User } = require("../models/index");
 const customError = require("../utils/customError");
 
-exports.protectRoute = async function(req, res, next){
+exports.protectRoute = async function (req, res, next) {
 
-	let token;
+    let token;
 
-	if(req.headers.authorization?.startsWith("Bearer")){
-		token = req.headers.authorization.split(" ")[1];
-	}
-	
-	if (!token) {
+    if (req.headers.authorization?.startsWith("Bearer")) {
+        token = req.headers.authorization.split(" ")[1];
+    }
+
+    if (!token) {
         return next(new customError("You are not logged in! Please login to get accsss", 401));
     };
 
@@ -41,4 +41,4 @@ exports.protectRoute = async function(req, res, next){
 }
 
 
-  //      if(error.name === 'TokenExpiredError') error = handleJWTExpiredError();
+//      if(error.name === 'TokenExpiredError') error = handleJWTExpiredError();

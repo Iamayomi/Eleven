@@ -8,13 +8,13 @@ const userController = require('../controllers/userController');
 const router = express.Router();
 
 
-router.post('/auth/register', authenticateController.register);
+router.post('/', authenticateController.register);
 
-router.post('/auth/login', authenticateController.signin);
+router.post('/', authenticateController.signin);
 
 router.use(protectController.protectRoute);
 
-router.get("/api/users/:userId", userController.getAUser);
+router.get("/", userController.getAUser);
 
 
 module.exports = router;
