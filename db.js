@@ -5,7 +5,7 @@ const Sequelize = (process.env.NODE_ENVIRONMENT === 'development') ? new sequeli
 	process.env.PG_DATABASE,
 	process.env.PG_USERNAME,
 	process.env.PG_PASSWORD,
-	{ dialect: 'postgres' }) : new sequelize.Sequlize(process.env.POSTGRES_URL);
+	{ dialect: 'postgres' }) : new sequelize.Sequelize(process.env.POSTGRES_URL);
 
 
 Sequelize.authenticate().then((res) => {
