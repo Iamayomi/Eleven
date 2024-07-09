@@ -1,11 +1,11 @@
 const sequelize = require('sequelize');
 require('dotenv').config({ path: './config.env' });
 
-const Sequelize = new sequelize.Sequelize(
+const Sequelize = (process.env.NODE_ENVIRONMENT === 'development') ? new sequelize.Sequelize(
 	process.env.PG_DATABASE,
 	process.env.PG_USERNAME,
 	process.env.PG_PASSWORD,
-	{ dialect: 'postgres' });
+	{ dialect: 'postgres' }) : new sequelize.Sequlize(process.env.POSTGRES_URL);
 
 
 Sequelize.authenticate().then((res) => {
