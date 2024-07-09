@@ -59,9 +59,13 @@ module.exports = (sequelize) => {
 	 		type: DataTypes.STRING,
 	 	},
 
+	 	userCreatedAt: {
+	 		type: DataTypes.DATE,
+	 		defaultValue: Date.now()
+	 	}
+
 	   },{
-		  timestamps: false,
-		  
+		  timestamps: false,  
 	});
 
 

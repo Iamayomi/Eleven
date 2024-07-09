@@ -1,6 +1,11 @@
 const sequelize = require('../db');
 
 const User = require('./userModel')(sequelize);
+const Organisation = require('./organisationmodel')(sequelize);
+
+
+User.hasMany(Organisation);
+Organisation.belongsTo(User);
 
 
 sequelize.sync({ alter: true }).then(() => {
@@ -10,4 +15,4 @@ sequelize.sync({ alter: true }).then(() => {
 })
 
 
-module.exports = { User };
+module.exports = { User, Organisation };

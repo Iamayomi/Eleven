@@ -1,4 +1,4 @@
-const { User } = require('../models/index');
+const { User, Organisation } = require('../models/index');
 const CustomError = require('../utils/customError');
 const signToken = require('../utils/signToken');
 
@@ -16,10 +16,15 @@ exports.register = async function (req, res, next) {
 			phone: req.body.phone
 		});
 
+		const createOrg = await Organisation.create({
+			name: `${createUser.firstName}'s Organisation`,
+			description: "this is a testing orgnisation",
+			userId: createUser.id
+		})
 
 		const token = await signToken(createUser.id);
 
-		const user = await User.findOne({ where: { id: createUser.id }, attributes: { exclude: ['password'] } })
+		const user = await User.findOne({ where: { id: createUser.id }, attributes: { exclude: ['password', 'userCreatedAt'] } })
 
 		res.cookie('jwt', token, { 
 	 		expires: new Date(Date.now() + process.env.JWT_COOKIES_EXPIRES_IN * 24 * 60 * 60 * 1000),
@@ -64,7 +69,7 @@ exports.signin = async function(req, res, next){
 
 		const token = await signToken(user.id);
 
-		user = await User.findOne({ where: { email }, attributes: { exclude: ['password'] } });
+		user = await User.findOne({ where: { email }, attributes: { exclude: ['password', 'userCreatedAt'] } });
 
 		res.cookie('jwt', token, { 
 	 		expires: new Date(Date.now() + process.env.JWT_COOKIES_EXPIRES_IN * 24 * 60 * 60 * 1000),
