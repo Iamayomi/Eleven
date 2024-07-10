@@ -16,7 +16,7 @@ app.use(express.json());
 
 app.use("/", userRoute);
 
-app.use("/", organisationRoute);
+app.use("/api/organisations", organisationRoute);
 
 
 app.all('*', (req, res, next) => {

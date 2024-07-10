@@ -10,16 +10,16 @@ describe('Authentication Controller', () => {
 
   beforeAll(async () => {
     user = await User.create({
-      firstName: 'John',
+      firstName: 'ayomide',
       lastName: 'Doe',
-      email: 'john@example.com',
+      email: 'ayomide@example.com',
       password: 'password123',
       phone: '1234567890',
     });
   });
 
   afterAll(async () => {
-    await User.destroy({ where: { email: 'john@example.com' } });
+    await User.destroy({ where: { email: 'ayomide@gmail.com' } });
   });
 
   describe('POST /auth/register', () => {
@@ -31,7 +31,7 @@ describe('Authentication Controller', () => {
         .send({
           firstName: 'Jane',
           lastName: 'Ayomide',
-          email: 'ayomide@example.com',
+          email: 'ayomide@gmail.com',
           password: 'password123',
           phone: '0987654321',
         });
@@ -40,7 +40,7 @@ describe('Authentication Controller', () => {
       expect(response.body.status).toBe('success');
       expect(response.body.data.accessToken).toBe('test_token');
 
-      await User.destroy({ where: { email: 'ayomide@example.com' } });
+      await User.destroy({ where: { email: 'ayomide@gmail.com' } });
     });
   });
 
@@ -51,7 +51,7 @@ describe('Authentication Controller', () => {
       const response = await request(app)
         .post('/auth/login')
         .send({
-          email: 'ayomide@example.com',
+          email: 'ayomide@gmail.com',
           password: 'password123',
         });
 

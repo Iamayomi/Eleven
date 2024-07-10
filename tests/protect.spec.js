@@ -10,7 +10,7 @@ describe('Protect Controller', () => {
     user = await User.create({
       firstName: 'John',
       lastName: 'Doe',
-      email: 'ayomide@example.com',
+      email: 'ayomide@gmail.com.com',
       password: 'password123',
       phone: '1234567890',
     });
@@ -21,7 +21,7 @@ describe('Protect Controller', () => {
   });
 
   afterAll(async () => {
-    await User.destroy({ where: { email: 'ayomide@example.com' } });
+    await User.destroy({ where: { email: 'ayomide@gmail.com.com' } });
   });
 
   describe('Protected Route', () => {
