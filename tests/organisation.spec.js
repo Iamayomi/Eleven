@@ -12,7 +12,7 @@ describe('Organisation Controller', () => {
     user = await User.create({
       firstName: 'John',
       lastName: 'Ayomide',
-      email: 'ayomide@example.com',
+      email: 'ayomide@gmail.com',
       password: 'password123',
       phone: '1234567890',
     });
@@ -21,7 +21,7 @@ describe('Organisation Controller', () => {
   });
 
   afterAll(async () => {
-    await User.destroy({ where: { email: 'ayomide@example.com' } });
+    await User.destroy({ where: { email: 'ayomide@gmail.com' } });
     await Organisation.destroy({ where: { userId: user.id } });
   });
 
