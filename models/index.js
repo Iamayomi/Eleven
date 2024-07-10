@@ -1,7 +1,7 @@
 const sequelize = require('../db');
 
 const User =  require('./userModel')(sequelize);
-const Organisation =  require('./organisationmodel')(sequelize);
+const Organisation =  require('./organisationModel')(sequelize);
 
 
 User.hasMany(Organisation);

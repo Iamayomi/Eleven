@@ -1,8 +1,9 @@
-const sequelize = require('sequelize');
+const { Sequelize } = require('sequelize');
 require('dotenv').config({ path: './config.env' });
 const fs = require('fs');
 const path = require('path');
 
+<<<<<<< HEAD
 const caCert = fs.readFileSync(path.resolve(__dirname, 'utils', 'ca.pem')).toString()
 
 const Sequelize = (process.env.NODE_ENVIRONMENT === 'production') ? 
@@ -18,6 +19,16 @@ const Sequelize = (process.env.NODE_ENVIRONMENT === 'production') ?
 	process.env.PG_PASSWORD,
 	{ dialect: 'postgres' }) ;
 
+const sequelize = new Sequelize(process.env.PG_URL, {
+  dialect: 'postgres',
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  }
+});
+
 
 Sequelize.authenticate().then(() => {
 	console.log('Database successfully connected 🔗🔗🔗', res)
@@ -25,16 +36,6 @@ Sequelize.authenticate().then(() => {
 	console.log('unable to connect to database 🔥🔥🔥', err)
 })
 
-// const connectDatabase = async () => {
-// 	 console.log('checking database connection 🔃🔃🔃🔃');
-// 	try {
-//       const connectDB = await Sequelize.authenticate();
-//          console.log('Database successfully connected 🔗🔗🔗')
-// 	} catch(err){
-// 		console.log('unable to connect to database 🔥🔥🔥', err)
-// 	}
-// };
+connectDatabase();
 
-// connectDatabase();
-
-module.exports = Sequelize;
+module.exports = sequelize;
